@@ -5,14 +5,13 @@ const Order = require('../model/orderModel');
 const OrderDetail = require('../model/orderDetailsModel');
 const Payment = require('../model/paymentModel');
 const Product = require('../model/productModel');
-const User = require('../model/userModel');
 const { or } = require('sequelize');
 
 
 const startTransaction = asyncHandler(async (req, res) => {
-    const [req_user_id, req_total, req_orderDetails] = [req.body['user_id'], req.body['total'] ,req.body['orderDetails']];
+    const [req_user_id, req_total, req_orderDetails] = [req.body['user_id'], req.body['total'], req.body['orderDetails']];
 
-    const order = await Order.create (
+    const order = await Order.create(
         {
             user_id: 1,
             payment_id: 2,
@@ -20,17 +19,19 @@ const startTransaction = asyncHandler(async (req, res) => {
             status: true,
         }
     )
-    const products = [{productId: 1}, {productId: 5}]
-    for(i = 0; i < products.length; i++) {
+    const products = [{ productId: 1 }, { productId: 5 }]
+    for (i = 0; i < products.length; i++) {
         const product = await Product.findOne({
             where: {
                 productId: products[i].productId,
             }
         })
-        await order.addProduct(product, {through: {
-            quantity: 2,
-            priceEach: 1
-        }}).then(() => {
+        await order.addProduct(product, {
+            through: {
+                quantity: 2,
+                priceEach: 1
+            }
+        }).then(() => {
             console.log("Sucess")
         })
     }

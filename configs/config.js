@@ -3,12 +3,9 @@ const config = {
         /* don't expose password or any sensitive info, done only for demo */
         host: "localhost",
         user: "root",
-        password: "ASD123qwe@",
-        database: "admin",
-        // socketPath: '/var/run/mysqld/mysqld.sock',
-        connectionLimit : 100, //important
+        database: "database",
+        connectionLimit: 100, //important
 
     },
-    // listPerPage: 10,
 };
 module.exports = config;
