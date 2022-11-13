@@ -1,8 +1,6 @@
 
-const database = require("../configs/database");
-const {pool} = require("../configs/database");
 const asyncHandler = require('express-async-handler')
-const Payment = require('../model/paymentModel');
+const Payment = require('../model/payment.model');
 
 
 let getAllCategory = asyncHandler(async (req, res) => {

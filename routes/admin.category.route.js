@@ -7,13 +7,13 @@ const {
 } = require('../controller/admin/admin.category.controller');
 
 const router = require('express').Router();
-const {checkToken} = require('../auth/token_validation')
+const auth = require("../auth/verifyToken")
 
-router.post('/category', checkToken,createCategory);
-router.get('/category/:id',checkToken, getCategoryByCategoryId);
-router.get('/category', checkToken,getCategories);
-router.patch('/category/:id', checkToken,updateCategory);
-router.delete('/category/:id', checkToken,deleteCategory);
+router.post('/category', auth.verifyController,createCategory);
+router.get('/category/:id',auth.verifyController, getCategoryByCategoryId);
+router.get('/category', auth.verifyController,getCategories);
+router.patch('/category/:id', auth.verifyController,updateCategory);
+router.delete('/category/:id', auth.verifyController,deleteCategory);
 
 
 module.exports = router;

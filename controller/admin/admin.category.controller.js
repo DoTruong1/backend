@@ -1,4 +1,4 @@
-const Category = require('../../model/categoryModel');
+const Category = require('../../model/category.model');
 
 // const {genSaltSync, hashSync, compareSync, compare} = require('bcrypt');
 

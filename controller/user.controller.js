@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../model/userModel');
+const User = require('../model/user.model');
 
 
 
@@ -26,9 +26,11 @@ function comparePassword(plaintext, hashed) {
 
 //  using sequelize
 let RegisterUser = async (req, res) => {
-    let { userName, email, phone, password } = req.body;
-
-
+    let { userName, email, phone, password, address } = req.body;
+    // return res.json({data: req.body});
+    if (!isIdUnique) {
+        return res.status(404).json({ message: "Email đã được sử dụng" })
+    }
     try {
         let existUser = await User.findOne({
             where: { email: email }
@@ -123,6 +125,17 @@ const viewUser = async (req, res) => {
     res.json(user);
 }
 
+const isIdUnique = async email => {
+    await User.findOne({
+        where: {
+            email: email
+        },
+        attribue: ['email']
+    })
+        .then(token => token !== null)
+        .then(isIdUnique => isIdUnique)
+
+}
 module.exports = {
     RegisterUser, LoginUser, changePassword, viewUser
 }

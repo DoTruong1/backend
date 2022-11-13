@@ -1,6 +1,5 @@
 products = [
     {
-        "id": 1,
         "name": "Mặt bích nhớt hộp rùa đến van thủy lực phía sau 5018 4018 3218",
         "Description": "",
         "category_id":6,
@@ -10,7 +9,6 @@ products = [
         "image": "",
     },
     {
-        "id": 2,
         "name": "Mặt bích + Coren nhớt hộp rùa máy kéo 4508",
         "Description": "",
         "category_id": 6,
@@ -21,7 +19,6 @@ products = [
         
     },
     {
-        "id": 3,
         "name": "Mặt bích nhớt + 2 coren máy kéo 3408",
         "Description": "",
         "category_id":6,
@@ -32,7 +29,6 @@ products = [
        
     },
     {
-        "id": 4,
         "name": "Bộ Van 1 tay + phụ kiện phù hợp cho máy kéo L32/4018 Kubota",
         "Description": "",
         "category_id": 7,
@@ -42,7 +38,6 @@ products = [
         "image": ""
     },
     {
-        "id": 5,
         "name": "Bộ Van 1 tay + phụ kiện phù hợp cho máy kéo L5018 Kubota",
         "Description": "",
         "category_id": 7,
@@ -52,7 +47,6 @@ products = [
         "image": ""
     },
     {
-        "id": 6,
         "name": "Bộ Van 1 tay + phụ kiện phù hợp cho máy kéo L31/3408 Kubota",
         "Description": "",
         "category_id": 7,
@@ -62,7 +56,6 @@ products = [
         "image": ""
     },
     {
-        "id": 7,
         "name": "Bộ Van 1 tay + phụ kiện phù hợp cho máy kéo L4508 Kubota",
         "Description": "",
         "category_id": 7,
@@ -72,7 +65,6 @@ products = [
         "image": ""
     },
     {
-        "id": 8,
         "name": "Bộ Van 2 tay và phụ kiện phù hợp cho máy kéo L3218/4018 Kubota",
         "Description": "",
         "category_id": 8,
@@ -82,7 +74,6 @@ products = [
         "image": ""
     },
     {
-        "id": 9,
         "name": "Bộ Van 2 tay và phụ kiện phù hợp cho máy kéo L5018 Kubota",
         "Description": "",
         "category_id": 8,
@@ -92,7 +83,6 @@ products = [
         "image": ""
     },
     {
-        "id": 10,
         "name": "Bộ Van 2 tay và phụ kiện phù hợp cho máy kéo L31/l3408 Kubota",
         "Description": "",
         "category_id": 8,
@@ -102,7 +92,6 @@ products = [
         "image": ""
     },
     {
-        "id": 11,
         "name": "Bộ Van 2 tay và phụ kiện phù hợp cho máy kéo L4508 Kubota",
         "Description": "",
         "category_id": 8,
@@ -112,7 +101,6 @@ products = [
         "image": ""
     },
     {
-        "id": 12,
         "name": "Cảo càng hướng DC70",
         "Description": "",
         "category_id": 11,
@@ -122,7 +110,6 @@ products = [
         "image": ""
     },
     {
-        "id": 13,
         "name": "Dụng cụ ép lò xo chuyển hướng",
         "Description": "",
         "category_id": 11,
@@ -132,7 +119,6 @@ products = [
         "image": "",
     },
     {
-        "id": 14,
         "name": "Tay Tuýp cân lực xiết ốc",
         "Description": "",
         "category_id": 11,
@@ -142,7 +128,6 @@ products = [
         "image": "",
     },
     {
-        "id": 15,
         "name": "DÂY ĐAI quạt gió két nước RF3405",
         "Description": "",
         "category_id": 12,
@@ -152,7 +137,6 @@ products = [
         "image": "",
     },
     {
-        "id": 16,
         "name": "DÂY ĐAI CHỮ V (V-BELT,C59) 0kg 2",
         "Description": "",
         "category_id": 12,
@@ -162,7 +146,6 @@ products = [
         "image": "",
     },
     {
-        "id": 17,
         "name": "DÂY ĐAI CHỮ V, BỘ Đập (V-BELT,C52) 0kg 2",
         "Description": "",
         "category_id": 12,
@@ -172,7 +155,6 @@ products = [
         "image": "",
     },
     {
-        "id": 18,
         "name": "DÂY ĐAI CHỮ V (V-BELT,B107) 0kg 1",
         "Description": "",
         "category_id": 12,
@@ -182,7 +164,6 @@ products = [
         "image": "",
     },
     {
-        "id": 19,
         "name": "DÂY ĐAI CHỮ V, HST (BELT,V) 0.000kg 2) 0kg 2",
         "Description": "",
         "category_id": 13,
@@ -192,7 +173,6 @@ products = [
         "image": "",
     },
     {
-        "id": 20,
         "name": "DÂY ĐAI CHỮ V, BỘ ĐẾM (COG-BELT,V,C54,COUNTER) 0.000kg 2) 0kg 2",
         "Description": "",
         "category_id": 13,
@@ -202,7 +182,6 @@ products = [
         "image": "",
     },
     {
-        "id": 21,
         "name": "DÂY ĐAI CHỮ V (BELT,V) 0.000kg 1",
         "Description": "",
         "category_id": 13,
@@ -212,7 +191,6 @@ products = [
         "image": "",
     },
     {
-        "id": 22,
         "name": "DÂY ĐAI CHỮ V (V-BELT(FAN,38REC)) 0.05kg 1",
         "Description": "",
         "category_id": 14,
@@ -222,7 +200,6 @@ products = [
         "image": "",
     },
     {
-        "id": 23,
         "name": "DÂY ĐAI CHỮ V (V-BELT(C63)) 0.4kg 1",
         "Description": "",
         "category_id": 14,
@@ -232,7 +209,6 @@ products = [
         "image": "",
     },
     {
-        "id": 24,
         "name": "DÂY ĐAI CHỮ V,CỤM (V-BELT,ASSY) 0.4kg 1",
         "Description": "",
         "category_id": 14,
@@ -243,7 +219,6 @@ products = [
 
     },
     {
-        "id": 25,
         "name": "DÂY ĐAI CHỮ V (V-BELT) 0kg 1",
         "Description": "",
         "category_id": 14,

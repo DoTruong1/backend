@@ -1,4 +1,4 @@
-const Product = require('../../model/productModel');
+const Product = require('../../model/product.model');
 
 // const {genSaltSync, hashSync, compareSync, compare} = require('bcrypt');
 const {sign} = require('jsonwebtoken');

@@ -7,13 +7,13 @@ const {
 } = require('../controller/admin/admin.product.controller');
 const {login} = require("../controller/admin/admin.login.controller")
 const router = require('express').Router();
-const {checkToken} = require('../auth/token_validation')
+const auth = require("../auth/verifyToken")
 
-router.post('/products', checkToken,createProduct);
-router.get('/products/:id',checkToken, getProductByProductId);
-router.get('/products', checkToken,getProducts);
-router.patch('/products/:id', checkToken,updateProduct);
-router.delete('/products/:id', checkToken,deleteProduct);
+router.post('/products', auth.verifyController,createProduct);
+router.get('/products/:id',auth.verifyController, getProductByProductId);
+router.get('/products', auth.verifyController,getProducts);
+router.patch('/products/:id', auth.verifyController,updateProduct);
+router.delete('/products/:id', auth.verifyController,deleteProduct);
 router.post('/login',login);
 
 module.exports = router;

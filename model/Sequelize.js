@@ -10,6 +10,9 @@ const sequelize = new Sequelize(config.db.database, config.db.user, config.db.pa
         acquire: 30000,
         idle: 10000
     },
+    define: {
+        timestamps: false
+    },
     dialectOptions: {
         // socketPath: config.db.socketPath
     }

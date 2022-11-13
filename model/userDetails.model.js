@@ -1,7 +1,8 @@
 const { DataTypes } = require('sequelize');
 
 const sequelize = require('./Sequelize').sequelize;
-const User = sequelize.define('User',
+
+const UserDetails = sequelize.define('UserDetails',
     {
         id: {
             type: DataTypes.INTEGER,
@@ -14,23 +15,10 @@ const User = sequelize.define('User',
             allowNull: true,
             defaultValue: 'user1'
         },
-        password: {
+        address: {
             type: DataTypes.STRING,
             allowNull: true,
-            defaultValue: 'user1'
-
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: 'user1'
-
-
-        },
-        phone: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: 'user1'
+            defaultValue: 'Một chín không không, hai ba địa chỉ nhà'
 
         }
     },
@@ -39,6 +27,6 @@ const User = sequelize.define('User',
         timestamps: true,
     }
 )
-//db.food.hasMany(db.meal, {as : 'Food', foreignKey : 'idFood'});
 
-module.exports = User;
+
+module.exports = UserDetails

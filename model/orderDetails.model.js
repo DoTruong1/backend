@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes} = require('sequelize')
 const sequelize = require('./Sequelize').sequelize;
-const Order = require('./orderModel');
+const Order = require('./order.model');
 
-const OrderDetail = sequelize.define('orderDetail',{
+const OrderDetail = sequelize.define('order_details',{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -17,7 +17,9 @@ const OrderDetail = sequelize.define('orderDetail',{
     }
 },{
     tableName: 'order_details',
-    // timestamps: true
+    timestamps: false,
+    createAt: false,
+    updateAt: false
 })
 
 
