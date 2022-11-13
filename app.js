@@ -5,6 +5,8 @@ const logger = require('morgan');
 const bodyParser = require('body-parser')
 
 
+
+
 // const productRouter = require('./routes/productRoute')
 const categoryRouter = require('./routes/categoryRoute')
 const productRouter = require('./routes/productRoute')
@@ -17,7 +19,6 @@ const userRouter = require('./routes/userRoute')
 const sequelize = require('./model/Sequelize').sequelize;
 //model
 // const User = require('./model/userModel'); 
-
 
 const app = express();
 
@@ -43,9 +44,6 @@ app.use('/user', userRouter);
 app.get('/', (req, res) => {
     res.send("WORK")
 })
-
-
-
 
 
 

@@ -5,6 +5,8 @@ const User = require('../model/userModel');
 
 
 let saltRounds = 10;
+
+
 //hash password
 let hashPassword = (password) => {
     return new Promise(async (resolve, reject) => {
@@ -26,21 +28,30 @@ function comparePassword(plaintext, hashed) {
 let RegisterUser = async (req, res) => {
     let { userName, email, phone, password } = req.body;
 
+
     try {
-        let hashUserPassword = await hashPassword(password)
-        // create user
-        let newUser = await User.create({
-            userName: userName,
-            email: email,
-            phone: phone,
-            password: hashUserPassword
+        let existUser = await User.findOne({
+            where: { email: email }
         })
-        // save to db
-        await newUser.save();
-        return res.status(200).json({
-            message: "ok",
-            data: newUser
-        })
+        if (existUser) {
+            return res.json("Existed Email")
+        } else {
+            let hashUserPassword = await hashPassword(password)
+            // create user
+            let newUser = await User.create({
+                userName: userName,
+                email: email,
+                phone: phone,
+                password: hashUserPassword
+            })
+            // save to db
+            await newUser.save();
+            return res.status(200).json({
+                message: "ok",
+                data: newUser
+            })
+        }
+
 
     } catch (err) {
         return res.status(400).json(err)
@@ -48,7 +59,6 @@ let RegisterUser = async (req, res) => {
 }
 
 const LoginUser = async (req, res) => {
-
     try {
         let email = req.body.email;
         let password = req.body.password
