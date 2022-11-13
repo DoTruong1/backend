@@ -4,7 +4,7 @@ const config = {
                 host: "localhost",
                 user: "root",
                 password: "",
-                database: "web",
+                database: "database",
                 // socketPath: '/var/run/mysqld/mysqld.sock',
                 connectionLimit: 100, //important
 
