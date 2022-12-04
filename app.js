@@ -30,7 +30,7 @@ app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// sequelize.sync({alter: false});
+sequelize.sync({ alter: false });
 
 
 app.use('/category', categoryRouter);
