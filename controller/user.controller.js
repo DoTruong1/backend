@@ -26,7 +26,7 @@ function comparePassword(plaintext, hashed) {
 
 //  using sequelize
 let RegisterUser = async (req, res) => {
-    let { userName, email, phone, password } = req.body;
+    let { userName, email, phone, password, address, isAdmin } = req.body;
     // return res.json({data: req.body});
     if (!isIdUnique) {
         return res.status(404).json({ message: "Email đã được sử dụng" })
@@ -44,7 +44,9 @@ let RegisterUser = async (req, res) => {
                 userName: userName,
                 email: email,
                 phone: phone,
-                password: hashUserPassword
+                password: hashUserPassword,
+                address: address,
+                isAdmin: isAdmin
             })
             // save to db
             await newUser.save();

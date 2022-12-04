@@ -14,6 +14,7 @@ const orderRouter = require('./routes/order.route')
 const adminProductRouter = require("./routes/admin.product.route");
 const adminCategoryRouter = require("./routes/admin.category.route");
 const userRouter = require("./routes/user.route");
+const commentRouter = require('./routes/comment.route')
 const { notFound, errHandler } = require('./auth/middleware/error');
 
 const sequelize = require('./model/Sequelize').sequelize;
@@ -30,7 +31,7 @@ app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-sequelize.sync({ alter: false });
+// sequelize.sync({ alter: true });
 
 
 app.use('/category', categoryRouter);
@@ -39,6 +40,7 @@ app.use('/adminProduct', adminProductRouter)
 app.use('/adminCategory', adminCategoryRouter)
 app.use('/product', productRouter);
 app.use('/user', userRouter)
+app.use('/comment', commentRouter)
 
 
 app.use(notFound);

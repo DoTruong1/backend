@@ -21,23 +21,25 @@ const User = sequelize.define('User',
             defaultValue: 'user1'
 
         },
-        // address: {
-        //     type: DataTypes.STRING,
-        //     allowNull: true,
-        //     defaultValue: "user1"
-        // },
+        address: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            defaultValue: "user1"
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: true,
             defaultValue: 'user1'
-
-
         },
         phone: {
             type: DataTypes.STRING,
             allowNull: true,
             defaultValue: 'user1'
 
+        },
+        isAdmin: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
         }
     },
     {
