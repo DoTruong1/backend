@@ -3,18 +3,16 @@ const Category = require('../../model/category.model');
 // const {genSaltSync, hashSync, compareSync, compare} = require('bcrypt');
 
 module.exports = {
-    createCategory: async(req, res) => {
+    createCategory: async (req, res) => {
         const body = req.body;
-        
+
         let catetory;
         try {
             catetory = await Category.create({
                 name: body.name,
-                description: body.description,
-                parentId: body.parentId,
-                image: body.image
+                description: body.description
             });
-        } catch(error) {
+        } catch (error) {
             return res.status(500).json({
                 "success": 0,
                 "message": error
@@ -22,21 +20,21 @@ module.exports = {
         }
 
         return res.status(200).json({
-            "success": 0,
+            "success": 1,
             "message": catetory
         })
-        
+
     },
-    getCategoryByCategoryId: async(req, res) => {
+    getCategoryByCategoryId: async (req, res) => {
         let id = req.params.id;
         let category;
-        try{
+        try {
             category = await Category.findAll({
                 where: {
                     id: id
                 }
             })
-        }catch(err) {
+        } catch (err) {
             return res.status(500).json({
                 "success": 0,
                 "message": err
@@ -48,11 +46,11 @@ module.exports = {
             "data": category
         })
     },
-    getCategories: async(req, res) => {
+    getCategories: async (req, res) => {
         let categories;
-        try{
+        try {
             categories = await Category.findAll();
-        }catch(err) {
+        } catch (err) {
             return res.status(500).json({
                 "success": 0,
                 "message": err
@@ -63,7 +61,7 @@ module.exports = {
             "data": categories
         })
     },
-    updateCategory: async(req, res) => {
+    updateCategory: async (req, res) => {
         let data = req.body;
         let id = req.params.id;
         // let salt = genSaltSync(10);
@@ -71,16 +69,16 @@ module.exports = {
         try {
             await Category.update({
                 name: data.name,
-                description: data.description,
-                parentId: data.parentId,
-                image: data.image
-            },{
+                description: data.description
+                // parentId: data.parentId,
+                // image: "public/images/" + req.file.originalname
+            }, {
                 where: {
                     id: id
                 }
             })
-        }catch(err) {
-            res.status(500),json({
+        } catch (err) {
+            res.status(500).json({
                 "success": 0,
                 "message": err
             })
@@ -90,7 +88,7 @@ module.exports = {
             "message": "update successful"
         })
     },
-    deleteCategory: async(req, res) => {
+    deleteCategory: async (req, res) => {
         let data = req.body;
         try {
             await Category.destroy({
@@ -98,7 +96,7 @@ module.exports = {
                     id: req.params.id
                 }
             });
-        } catch(err) {
+        } catch (err) {
             return res.status(500).json({
                 "success": 0,
                 "message": err
@@ -108,6 +106,6 @@ module.exports = {
             success: 1,
             message: "delete successfully"
         });
-        
+
     }
 }

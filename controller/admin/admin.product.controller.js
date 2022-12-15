@@ -1,24 +1,24 @@
 const Product = require('../../model/product.model');
 
 // const {genSaltSync, hashSync, compareSync, compare} = require('bcrypt');
-const {sign} = require('jsonwebtoken');
+const { sign } = require('jsonwebtoken');
 
 module.exports = {
-    createProduct: async(req, res) => {
+    createProduct: async (req, res) => {
         const body = req.body;
-        
+        console.log(body.category_id);
         let product;
         try {
             product = await Product.create({
                 name: body.name,
                 description: body.description,
-                category_id: body.category_id,
-                quantity: body.quantity,
-                price: body.price,
-                discount_id: body.discount_id,
-                image: body.image
+                categoryId: parseInt(body.categoryId),
+                quantityInStock: parseInt(body.quantity),
+                price: parseFloat(body.price),
+                discount_id: parseInt(body.discount_id),
+                image: "null"
             });
-        } catch(error) {
+        } catch (error) {
             return res.status(500).json({
                 "success": 0,
                 "message": error
@@ -26,21 +26,21 @@ module.exports = {
         }
 
         return res.status(200).json({
-            "success": 0,
+            "success": 1,
             "message": product
         })
-        
+
     },
-    getProductByProductId: async(req, res) => {
+    getProductByProductId: async (req, res) => {
         let id = req.params.id;
         let product;
-        try{
+        try {
             product = await Product.findAll({
                 where: {
-                    productId: id
+                    id: id
                 }
             })
-        }catch(err) {
+        } catch (err) {
             return res.status(500).json({
                 "success": 0,
                 "message": err
@@ -52,11 +52,11 @@ module.exports = {
             "data": product
         })
     },
-    getProducts: async(req, res) => {
+    getProducts: async (req, res) => {
         let products;
-        try{
+        try {
             products = await Product.findAll();
-        }catch(err) {
+        } catch (err) {
             return res.status(500).json({
                 "success": 0,
                 "message": err
@@ -67,7 +67,7 @@ module.exports = {
             "data": products
         })
     },
-    updateProduct: async(req, res) => {
+    updateProduct: async (req, res) => {
         let data = req.body;
         let id = req.params.id;
         // let salt = genSaltSync(10);
@@ -80,14 +80,14 @@ module.exports = {
                 quantityInStock: data.quantityInStock,
                 price: data.price,
                 discountId: data.discountId,
-                image: data.image
-            },{
+                image: "null"
+            }, {
                 where: {
-                    productId: id
+                    id: id
                 }
             })
-        }catch(err) {
-            res.status(500),json({
+        } catch (err) {
+            res.status(500).json({
                 "success": 0,
                 "message": err
             })
@@ -97,15 +97,15 @@ module.exports = {
             "message": "update successful"
         })
     },
-    deleteProduct: async(req, res) => {
+    deleteProduct: async (req, res) => {
         let data = req.body;
         try {
             await Product.destroy({
                 where: {
-                    productId: req.params.id
+                    id: req.params.id
                 }
             });
-        } catch(err) {
+        } catch (err) {
             return res.status(500).json({
                 "success": 0,
                 "message": err
@@ -115,40 +115,7 @@ module.exports = {
             success: 1,
             message: "delete successfully"
         });
-        
-    },
-    login: (req, res) => {
-        const data = req.body;
-        getAdminAccount(data.username, (err, results) => {
-            if(err) {
-                return res.json({
-                    success: 0,
-                    message: "invalid username or password"
-                });
-            }
-            // const result = compareSync(data.password, results.Password);
-            console.log(data.password)
-            console.log(results.password);
-            if(data.password === results.password) {
-                results.password = undefined;
-                const jsontoken = sign({result:results}, 'qwe1234',{
-                    expiresIn: "1h"
-                })
-
-                return res.json({
-                    success: 1,
-                    message: "login successfully",
-                    token: jsontoken
-                });
-
-            }
-            else{
-                return res.json({
-                    success: 0,
-                    message: "invalid account or password"
-                });
-            }
-        });
 
     }
+
 }

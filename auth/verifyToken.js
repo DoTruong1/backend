@@ -14,4 +14,4 @@ const verifyController = (req, res, next) => {
         return res.status(401).json("not authenticated");
     }
 }
-module.exports = { verifyController };
+module.exports = { verifyController };  

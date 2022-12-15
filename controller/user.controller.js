@@ -9,10 +9,10 @@ let saltRounds = 10;
 
 //hash password
 let hashPassword = (password) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         try {
-            const salt = await bcrypt.genSaltSync(saltRounds);
-            const hash = await bcrypt.hashSync(password, salt);
+            const salt = bcrypt.genSaltSync(saltRounds);
+            const hash = bcrypt.hashSync(password, salt);
             resolve(hash);
         } catch (e) {
             reject(e);
@@ -46,7 +46,7 @@ let RegisterUser = async (req, res) => {
                 phone: phone,
                 password: hashUserPassword,
                 address: address,
-                isAdmin: isAdmin
+                isAdmin: false
             })
             // save to db
             await newUser.save();
@@ -61,6 +61,51 @@ let RegisterUser = async (req, res) => {
         return res.status(400).json(err)
     }
 }
+
+const KEY_ADMIN = "admin";
+
+let RegisterAdmin = async (req, res) => {
+    let { userName, email, phone, password, address, keyAdmin } = req.body;
+    // return res.json({data: req.body});
+
+    // khi dang ki admin can co key admin de xac thuc
+    if (keyAdmin === KEY_ADMIN) {
+        if (!isIdUnique) {
+            return res.status(404).json({ message: "Email đã được sử dụng" })
+        }
+        try {
+            let existUser = await User.findOne({
+                where: { email: email }
+            })
+            if (existUser) {
+                return res.json("Existed Email")
+            } else {
+                let hashUserPassword = await hashPassword(password)
+                // create user
+                let newUser = await User.create({
+                    userName: userName,
+                    email: email,
+                    phone: phone,
+                    password: hashUserPassword,
+                    address: address,
+                    isAdmin: true
+                })
+                // save to db
+                await newUser.save();
+                return res.status(200).json({
+                    message: "ok",
+                    data: newUser
+                })
+            }
+
+
+        } catch (err) {
+            return res.status(400).json(err)
+        }
+    }
+}
+
+
 
 const LoginUser = async (req, res) => {
     try {
@@ -78,6 +123,36 @@ const LoginUser = async (req, res) => {
 
                 return res.status(200).json({
                     message: 'okk',
+                    user,
+                    accessToken
+                })
+            } else {
+                return res.status(400).json("wrong password");
+            }
+        } else {
+            return res.status(400).json("wrong email")
+        }
+    } catch (err) {
+        return res.status(400).json(err)
+    }
+}
+
+const LoginAdmin = async (req, res) => {
+    try {
+        let email = req.body.email;
+        let password = req.body.password
+        let user = await User.findOne({
+            where: { email: email }
+        })
+        if (user != null) {
+            const results = comparePassword(password, user.password)
+            if (results == 1 && user.isAdmin) {
+                const accessToken = jwt.sign({
+                    id: user.id,
+                }, "secretKey", { expiresIn: '1h' });
+
+                return res.status(200).json({
+                    message: 'login admin successfully',
                     user,
                     accessToken
                 })
@@ -139,5 +214,5 @@ const isIdUnique = async email => {
 
 }
 module.exports = {
-    RegisterUser, LoginUser, changePassword, viewUser
+    RegisterUser, LoginUser, changePassword, viewUser, LoginAdmin, RegisterAdmin
 }

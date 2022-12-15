@@ -5,15 +5,19 @@ const {
     updateProduct,
     deleteProduct,
 } = require('../controller/admin/admin.product.controller');
-const {login} = require("../controller/admin/admin.login.controller")
+const {LoginAdmin, RegisterAdmin} = require("../controller/user.controller")
 const router = require('express').Router();
-const auth = require("../auth/verifyToken")
+const {verifyController} = require('../auth/verifyToken');
+const {upload} = require('../auth/middleware/upload');
+// const {changeStatus} = require('../controller/admin/admin.statusOrder.constroller')
 
-router.post('/products', auth.verifyController,createProduct);
-router.get('/products/:id',auth.verifyController, getProductByProductId);
-router.get('/products', auth.verifyController,getProducts);
-router.patch('/products/:id', auth.verifyController,updateProduct);
-router.delete('/products/:id', auth.verifyController,deleteProduct);
-router.post('/login',login);
+router.post('/products', verifyController,upload.single('image'),createProduct);
+router.get('/products/:id',verifyController, getProductByProductId);
+router.get('/products', verifyController,getProducts);
+router.patch('/products/:id', verifyController,upload.single('image'),updateProduct);
+router.delete('/products/:id', verifyController,deleteProduct);
+router.post('/login',LoginAdmin);
+router.post('/register', RegisterAdmin);
+// router.patch('/changeStatus/:id', changeStatus);
 
 module.exports = router;

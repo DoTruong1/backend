@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('./Sequelize').sequelize;
 const Product = sequelize.define('product',
     {
-        productId: {
+        id: {
             type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, unique: true
         },
         name: {
@@ -11,14 +11,12 @@ const Product = sequelize.define('product',
             unique: true,
             allowNull: false
         },
-        // description: {
-        //     type: DataTypes.STRING, defaultValue: 'không có link ảnh'
-        // },
-        categoryId: { type: DataTypes.INTEGER, defaultValue: 0 },
+        description: { type: DataTypes.STRING, defaultValue: 'không có link ảnh' },
+        categoryId: { type: DataTypes.INTEGER },
         quantityInStock: { type: DataTypes.INTEGER(15), defaultValue: 10, },
         price: {
             type: DataTypes.DECIMAL(15, 0),
-            defaultValue: 0000000,
+            defaultValue: 0,
 
         },
         discountId: { type: DataTypes.INTEGER, defaultValue: 0 },
@@ -26,13 +24,13 @@ const Product = sequelize.define('product',
         createdAt: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: new Date(),
+            defaultValue: DataTypes.NOW,
             field: 'created_at'
         },
         updatedAt: {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: new Date(),
+            defaultValue: DataTypes.NOW,
             field: 'updated_at'
         },
     },
@@ -41,6 +39,7 @@ const Product = sequelize.define('product',
         timestamps: false,
     }
 )
+
 
 
 module.exports = Product;

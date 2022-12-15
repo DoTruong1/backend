@@ -1,1 +1,0 @@
-// luu thong tin cac item trong gio hang 

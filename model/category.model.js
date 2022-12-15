@@ -1,6 +1,7 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('./Sequelize').sequelize;
-const Product = require('./product.model')
+const Product = require('./product.model');
+
 const Category = sequelize.define('product_category',{
     id: {
         type: DataTypes.INTEGER,
@@ -14,25 +15,16 @@ const Category = sequelize.define('product_category',{
         allowNull: false,
         unique: true
     },
-    image: {
-        type: DataTypes.STRING
-    },
     description: {
         type: DataTypes.STRING
     },
-    parentId: {
-        type: DataTypes.INTEGER
-    }
 },{
     freezeTableName: true
 });
 
-Category.hasMany(Category,{
-    foreignKey: 'parentId',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-});
-
+Category.hasMany(Product, {
+    foreignKey: 'categoryId'
+})
 
 
 module.exports = Category;

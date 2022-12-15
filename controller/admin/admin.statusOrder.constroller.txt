@@ -1,0 +1,69 @@
+const Order = require('../../model/order.model');
+const Status = require('../../model/statusOrder');
+const OrderDetail = require('../../model/orderDetailsModel');
+const Product = require('../../model/product.model');
+
+module.exports = {
+    changeStatus: async(req, res) => {
+        const data = req.body;
+        let status = req.body.status;
+        try {
+            await Order.update({status: status},{
+                where: {
+                    id: req.params.id
+                }
+            })
+        } catch(err) {
+            return res.status(500).json({
+                "success": 0,
+                "message": "update status fail"
+            })
+        }
+        if(status == 0) {
+            let order_details;
+            try {
+                order_details = await OrderDetail.findAll({
+                    where: {
+                        order_id : req.params.id
+                    }
+                })
+            } catch(err) {
+                res.status(500).json({
+                    "success": 0,
+                    "message": "find order detail fail"
+                })
+            }
+            console.log(order_details.length);
+            try {
+                for(let i = 0; i < order_details.length; ++i) {
+                    let id = order_details[i].product_id;
+                    let addition = order_details[i].quantityOrdered;
+                    let product = await Product.findByPk(id);
+
+                    addition += product.quantityInStock;
+                    await Product.update({quantityInStock: addition}, {
+                        where: {
+                            id: id
+                        }
+                    })
+                }
+            } catch(err){
+                return res.status(500).json({
+                    "success": 0,
+                    "message": "update product fail"
+                });
+            }
+
+            return res.status(200).json({
+                "success": 1,
+                "message": "huy don hang thanh cong"
+            });
+        }
+
+        return res.status(200).json({
+            "success": 1,
+            "message": "thay doi status thanh cong"
+        });
+
+    }
+}

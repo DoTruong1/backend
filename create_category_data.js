@@ -6,8 +6,6 @@ const categories = require('./categorydata');
         const x =await Category.create({
         name: category.name,
         description: category.description,
-        parentId: category.parentID,
-        image : category.image
         }).then();
     }
 })();

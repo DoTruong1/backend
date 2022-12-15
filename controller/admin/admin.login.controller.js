@@ -1,4 +1,5 @@
-const {sign} = require('jsonwebtoken');
+const {sign, JsonWebTokenError} = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 const Admin = require('../../model/admin.model')
 
 module.exports = {
@@ -14,11 +15,9 @@ module.exports = {
             })
         }
         results = results[0];
-        console.log(data.password)
-        console.log(results.password);
 
-        if(data.password === results.password) {
-            results.password = undefined;
+        if(data.password === results.password && data.admin_name === results.admin_name) {
+            // results.password = undefined;
             const jsontoken = sign({result:results}, 'qwe1234',{
                 expiresIn: "1h"
             })

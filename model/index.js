@@ -5,21 +5,24 @@ const User = require('./user.model')
 const Payment = require('./payment.model')
 const Category = require('./category.model')
 const UserDetails = require('./userDetails.model')
+const Comment = require('./comment.model')
 
-Category.hasMany(Category,{
-    foreignKey: 'parentId',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-});
+// const sequelize = require('./Sequelize').sequelize
+
+// Category.hasMany(Category, {
+//     foreignKey: 'parentId',
+//     onDelete: 'CASCADE',
+//     onUpdate: 'CASCADE'
+// });
 
 
 // if A has a b_id column, then A belongsTo B
-User.hasMany(Order, {foreignKey:"user_id"});
+User.hasMany(Order, { foreignKey: "user_id" });
 Order.belongsTo(User); // tao user_id ở model Order
 
 // Order - Product
-Order.belongsToMany(Product, {through: OrderDetail, unique: false, foreignKey: 'orderId'});
-Product.belongsToMany(Order, {through: OrderDetail, unique: true, foreignKey: 'productId'});
+Order.belongsToMany(Product, { through: OrderDetail, unique: false, foreignKey: 'orderId' });
+Product.belongsToMany(Order, { through: OrderDetail, unique: true, foreignKey: 'productId' });
 
 Order.hasMany(OrderDetail, {
     foreignKey: 'orderId'
@@ -42,8 +45,9 @@ OrderDetail.belongsTo(Order, {
     foreignKey: 'orderId'
 });
 
+// sequelize.sync()
 
 module.exports = {
     User, Order, OrderDetail,
-    Product, Category, Payment
+    Product, Category, Payment, Comment
 }

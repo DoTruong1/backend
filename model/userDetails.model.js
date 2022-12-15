@@ -10,7 +10,7 @@ const UserDetails = sequelize.define('UserDetails',
             autoIncrement: true,
             unique: true
         },
-        userName: {
+        fullName: {
             type: DataTypes.STRING,
             allowNull: true,
             defaultValue: 'user1'
@@ -23,7 +23,7 @@ const UserDetails = sequelize.define('UserDetails',
         }
     },
     {
-        tableName: 'user',
+        tableName: 'user_details',
         timestamps: true,
     }
 )
